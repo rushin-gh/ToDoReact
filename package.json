@@ -1,0 +1,24 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "To Do app",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rushin-gh/ToDoReact.git"
+  },
+  "author": "Rushi N",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rushin-gh/ToDoReact/issues"
+  },
+  "homepage": "https://github.com/rushin-gh/ToDoReact#readme",
+  "dependencies": {
+    "parcel": "^2.15.4",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
