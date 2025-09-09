@@ -2,15 +2,29 @@ import React from 'react';
 import ToDoList from '../../Data/ToDoList';
 
 const Body = () => {
-
-    console.log(ToDoList);
-
     return (
         <div id='Body'>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Task</td>
+                        <td>Priority</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        ToDoList.map((item, index) => 
+                            <tr key={index}>
+                                <td>{item.Task}</td>
+                                <td>{item.priority}</td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </table>
+            
             <ol>
-                {
-                    ToDoList.map((item, index) => <li key={index}>{item}</li>)
-                }
+                
             </ol>
         </div>
     )
