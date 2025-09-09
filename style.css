@@ -1,0 +1,34 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#AppLayout {
+    padding: 20px;
+    border: 1px solid black;
+}
+
+#Header {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}
+
+#Body {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}
+
+#AppOthers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#Header > #AppOthers > h2 {
+    padding: 0 10px;
+}
+
+Header {
+}
