@@ -16,9 +16,7 @@ body {
 
 #Body {
     border: 1px solid red;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
+    
 }
 
 #AppOthers {
@@ -31,11 +29,36 @@ body {
     padding: 0 10px;
 }
 
+#Body {
+    padding: 20px;
+}
+
 table {
+    margin-top: 20px;
     padding: 10px;
     border-collapse: collapse;
 }
 
 table, tr, td {
     border: 2px solid purple
+}
+
+td {
+    padding: 5px;
+}
+
+table > thead {
+    font-weight: bold;
+}
+
+#ToDoInput, #ToDoAddBtn {
+    padding: 5px;
+}
+
+#AddToDo > #ToDoInput {
+    margin-right: 20px;
+}
+
+#ToDoAddBtn {
+    width: 75px;
 }
