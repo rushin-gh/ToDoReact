@@ -10,7 +10,6 @@ const Body = () => {
         if (!newTask.trim())
             return;
 
-        
         const newItem = {
             'Task': newTask,
             'priority': 1
@@ -20,25 +19,32 @@ const Body = () => {
         setNewTask('');
     }
 
+    const deleteIcon = new URL("../Assets/Images/deleteIcon.png", import.meta.url).href;
+    console.log(deleteIcon);
+
     return (
         <div id='Body'>
             <div id='AddToDo'>
                 <input id='ToDoInput' type='text' value={newTask} onChange={(e) => setNewTask(e.target.value)}/>
                 <button id='ToDoAddBtn' onClick={AddToDo}>Add</button>
             </div>
-            <table>
+            <table className='styled-table'>
                 <thead>
                     <tr>
                         <td>Task</td>
-                        <td>Priority</td>
+                        <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         toDoList.map((item, index) => 
                             <tr key={index}>
-                                <td>{item.Task}</td>
-                                <td>{item.priority}</td>
+                                <td>
+                                    {item.Task}
+                                </td>
+                                <td>
+                                    <img src={deleteIcon} alt='Decorative' height='25px' width='25px'/>
+                                </td>
                             </tr>
                         )
                     }
