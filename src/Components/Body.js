@@ -5,7 +5,7 @@ const Body = () => {
 
     let [toDoList, setToDoList] = useState(ToDoList);
     let [newTask, setNewTask] = useState('');
-    
+
     let AddToDo = () => {
         if (!newTask.trim())
             return;
@@ -19,9 +19,13 @@ const Body = () => {
         setNewTask('');
     }
 
-    const deleteIcon = new URL("../Assets/Images/deleteIcon.png", import.meta.url).href;
-    console.log(deleteIcon);
+    let RemoveToDo = (index) => {
+        let temp = [...toDoList];
+        temp.splice(index, 1);
+        setToDoList(temp);
+    }
 
+    const deleteIcon = new URL("../Assets/Images/deleteIcon.png", import.meta.url).href;
     return (
         <div id='Body'>
             <div id='AddToDo'>
@@ -43,7 +47,7 @@ const Body = () => {
                                     {item.Task}
                                 </td>
                                 <td>
-                                    <img src={deleteIcon} alt='Decorative' height='25px' width='25px'/>
+                                    <img onClick={() => RemoveToDo(index)} src={deleteIcon} alt='Decorative' height='25px' width='25px'/>
                                 </td>
                             </tr>
                         )
