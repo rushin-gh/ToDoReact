@@ -8,13 +8,13 @@ body {
 }
 
 #Header {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     display: flex;
     justify-content: space-between;
 }
 
 #Body {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     
 }
 

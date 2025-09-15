@@ -1,13 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ToDoList from '../../Data/ToDoList';
-
-/* 
-    To Do
-
-    Modify AddToDo, UpdateToDo, DeleteTodo
-    for localStorage
-*/
-
 
 const Body = () => {
     let [todoList, setTodoList] = useState(null);
@@ -21,7 +12,7 @@ const Body = () => {
     }, []);
 
     let AddToDo = () => {
-        if (!newTask.trim())
+        if (!newTask || !newTask.trim())
             return;
 
         const newItem = {
@@ -29,32 +20,42 @@ const Body = () => {
             'priority': 1
         }
 
-        let updatedTodoList = [...todoList, newItem]
-        localStorage.setItem('TodoList', JSON.stringify(updatedTodoList));
+        let updatedList = [];
+        if (todoList != null) {
+            updatedList = [...todoList];
+        }
+        updatedList.push(newItem);
 
-        setTodoList(updatedTodoList);
+        localStorage.setItem('TodoList', JSON.stringify(updatedList));
+
+        setTodoList(updatedList);
         setNewTask('');
     }
 
     let RemoveToDo = (index) => {
         let temp = [...todoList];
         temp.splice(index, 1);
+        localStorage.setItem('TodoList', JSON.stringify(temp));
         setTodoList(temp);
     }
 
     let EditToDo = (index) => {
         let todoToEdit = todoList[index];
         let updatedTodo = prompt('Edit the current to do', todoToEdit.Task);
+
+        if (!updatedTodo && !updatedTodo.trim()) {
+            return;
+        }
+
         let updatedList = [...todoList];
         updatedList[index].Task = updatedTodo;
+
+        localStorage.setItem('TodoList', JSON.stringify(updatedList));
+        setTodoList(updatedList);
     }
 
     const deleteIcon = new URL("../Assets/Images/deleteIcon.png", import.meta.url).href;
     const editIcon = new URL("../Assets/Images/edit.png", import.meta.url).href;
-
-    if (todoList === null) {
-        return (<h3>Loading...</h3>);
-    }
 
     return (
         <div id='Body'>
@@ -62,34 +63,42 @@ const Body = () => {
                 <input id='ToDoInput' type='text' value={newTask} onChange={(e) => setNewTask(e.target.value)}/>
                 <button id='ToDoAddBtn' onClick={AddToDo}>Add</button>
             </div>
-            <table className='styled-table'>
-                <thead>
-                    <tr>
-                        <td>Task</td>
-                        <td width="2%">Update</td>
-                        <td width="2%">Delete</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        todoList.map((item, index) => 
-                            <tr key={index}>
-                                <td>
-                                    {item.Task}
-                                </td>
-                                <td style={{justifyContent: 'center'}}>
-                                    <img onClick={() => EditToDo(index)} src={editIcon} alt='Decorative' height='25px' width='25px'/>
-                                </td>
-                                <td style={{justifyContent: 'center'}}>
-                                    <img onClick={() => RemoveToDo(index)} src={deleteIcon} alt='Decorative' height='25px' width='25px'/>
-                                </td>
-                            </tr>
+            {
+                todoList === null 
+                    ? (<h3>Loading...</h3>)
+                    : todoList.length === 0
+                        ? (<h3>No items</h3>)
+                        : (
+                            <table className='styled-table'>
+                                <thead>
+                                    <tr>
+                                        <td>Task</td>
+                                        <td width="2%">Update</td>
+                                        <td width="2%">Delete</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        todoList.map((item, index) => 
+                                            <tr key={index}>
+                                                <td>
+                                                    {item.Task}
+                                                </td>
+                                                <td style={{justifyContent: 'center'}}>
+                                                    <img onClick={() => EditToDo(index)} src={editIcon} alt='Decorative' height='25px' width='25px'/>
+                                                </td>
+                                                <td style={{justifyContent: 'center'}}>
+                                                    <img onClick={() => RemoveToDo(index)} src={deleteIcon} alt='Decorative' height='25px' width='25px'/>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
                         )
-                    }
-                </tbody>
-            </table>
+            }
         </div>
-    )
+    );
 }
 
 export default Body;
