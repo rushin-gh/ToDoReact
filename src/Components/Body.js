@@ -43,7 +43,7 @@ const Body = () => {
         let todoToEdit = todoList[index];
         let updatedTodo = prompt('Edit the current to do', todoToEdit.Task);
 
-        if (!updatedTodo && !updatedTodo.trim()) {
+        if (!updatedTodo || !updatedTodo.trim()) {
             return;
         }
 
